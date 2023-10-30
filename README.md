@@ -2,6 +2,10 @@
 
 This is a simple piece of technology I wrote to quickly gather data about items for sale. It has minimal base functionality, but works well enough to quickly iterate and add more features. I likely won't iterate on this, it's done for what I need. Feel free to do what you want and use this how you'd see fit.
 
+## Demonstration
+
+https://github.com/Woovie/inventory-creator/assets/7304619/1d369a16-2849-4c03-ab50-a81b119f9f9a
+
 ## Usage
 
 ### Prerequisites
