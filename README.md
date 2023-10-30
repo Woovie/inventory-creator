@@ -6,7 +6,7 @@ This is a simple piece of technology I wrote to quickly gather data about items 
 
 ### Prerequisites
 
-- [bun](https://github.com/oven-sh/bun)
+- [Bun](https://github.com/oven-sh/bun)
 
 ### Install
 
@@ -15,3 +15,12 @@ This is a simple piece of technology I wrote to quickly gather data about items 
 ### Start up
 
 `bun run dev`
+
+## Technologies used
+
+- [Vue](https://github.com/vuejs/vue)
+- [Vite](https://github.com/vitejs/vite)
+- [Bun](https://github.com/oven-sh/bun)
+- [FileSaver.js](https://github.com/eligrey/FileSaver.js)
+- [JSZip](https://github.com/Stuk/jszip)
+- [Flexoki](https://github.com/kepano/flexoki)
