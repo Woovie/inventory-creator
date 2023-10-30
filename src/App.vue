@@ -34,10 +34,10 @@
     </div>
     <div id="forms">
       <label for="productName">Product Name </label>
-      <input id="productName" type="text" placeholder="Cool keyboard" />
+      <input id="productName" type="text" placeholder="Cool keyboard" v-model="keyboardName" />
       <label for="productNotes">Product Notes </label>
-      <textarea id="productNotes" rows="4"></textarea>
-      <button>Submit</button>
+      <textarea id="productNotes" rows="4" v-model="keyboardDesc"></textarea>
+      <button @click="completeForm">Submit</button>
     </div>
     <canvas id="photoStore" :style="{width, height}"></canvas>
   </div>
@@ -46,6 +46,8 @@
 <script>
   import CameraTooling from './components/CameraTooling.vue'
   import PictureAngles from './components/PictureAngles.vue'
+  import JSZip from 'jszip'
+  import { saveAs } from 'file-saver'
 
 
   export default {
@@ -68,7 +70,9 @@
         images: [
         ],
         width: 3840,
-        height: 2160
+        height: 2160,
+        keyboardName: '',
+        keyboardDesc: ''
       }
     },
     mounted() {
@@ -87,9 +91,43 @@
         const imageHolder = document.querySelector('#photoStore')
         const videoPreview = document.querySelector('#videoPreview')
         const context = imageHolder.getContext("2d")
+        imageHolder.width = this.width
+        imageHolder.height = this.height
         context.drawImage(videoPreview, 0, 0, this.width, this.height)
         const data = imageHolder.toDataURL("image/png")
-        const current
+        this.images[this.selectedAngle] = data
+      },
+      completeForm() {
+        const zip = new JSZip()
+
+        zip.file("metadata.json", JSON.stringify({
+          keyboardName: this.keyboardName,
+          description: this.keyboardDesc
+        }))
+
+        const imageDirectory = zip.folder("images")
+        for (let imageIndex in this.images) {
+          const blobbed = this.dataURLtoBlob(this.images[imageIndex])
+          imageDirectory.file(
+            `${this.keyboardName}-${this.angles[imageIndex]}.png`,
+            blobbed
+          )
+        }
+
+        zip.generateAsync({
+          type: "blob"
+        }).then((content) => {
+          saveAs(content, `${this.keyboardName}.zip`)
+
+          this.keyboardName = ''
+          this.keyboardDesc = ''
+          this.images = []
+          this.selectedAngle = 0
+        })
+      },
+      dataURLtoBlob(dataurl) {
+        const arr = dataurl.split(','), mime = arr[0].match(/:(.*?);/)[1];
+        return new Blob([Uint8Array.from(atob(arr[1]), c => c.charCodeAt(0))], {type: mime});
       }
     },
     computed: {
@@ -141,7 +179,12 @@
 
   #forms {
     display: flex;
+    width: 50%;
     flex-direction: column;
+  }
+
+  #productNotes {
+    height: 12rem;
   }
 
   #photoStore {

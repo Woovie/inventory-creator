@@ -2,7 +2,7 @@
   <div class="angleContainer" :class="{ selected: selectedAngle }" :idx="key">
     <h1>{{ angleName }}</h1>
     <img v-if="imageData" class="imagePreview" :src="imageData" alt="Image Preview" />
-    <div class="imagePreview">No image taken</div>
+    <div v-else class="imagePreview">No image taken</div>
   </div>
 </template>
 
@@ -27,6 +27,7 @@
   .angleContainer {
     margin-top: 1rem;
     flex-grow: 1;
+    flex-basis: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
