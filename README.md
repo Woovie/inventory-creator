@@ -1,7 +1,17 @@
-# Vue 3 + Vite
+# Inventory Creator
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+This is a simple piece of technology I wrote to quickly gather data about items for sale. It has minimal base functionality, but works well enough to quickly iterate and add more features. I likely won't iterate on this, it's done for what I need. Feel free to do what you want and use this how you'd see fit.
 
-## Recommended IDE Setup
+## Usage
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+### Prerequisites
+
+- [bun](https://github.com/oven-sh/bun)
+
+### Install
+
+`bun i`
+
+### Start up
+
+`bun run dev`
